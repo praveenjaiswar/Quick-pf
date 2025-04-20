@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPF Claim Form</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Hide all fields except "Bank Account Number" on small screens */
+        @media (max-width: 768px) {
+            .form-group:not(.bank-field) {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>EPF Claim Form</h2>
+        <form id="epfForm">
+            <div class="form-group">
+                <label for="employeeName">Employee Name:</label>
+                <input type="text" id="employeeName" name="employeeName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fatherHusbandName">Father/Husband Name:</label>
+                <input type="text" id="fatherHusbandName" name="fatherHusbandName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile:</label>
+                <input type="text" id="mobile" name="mobile" required>
+            </div>
+
+            <div class="form-group">
+                <label for="aadhaar">Aadhaar No.:</label>
+                <input type="text" id="aadhaar" name="aadhaar" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pan">PAN No.:</label>
+                <input type="text" id="pan" name="pan" required>
+            </div>
+
+            <!-- Bank Account Field (Visible on all devices) -->
+            <div class="form-group bank-field">
+                <label for="bankAccount">Bank Account No.:</label>
+                <input type="text" id="bankAccount" name="bankAccount" required>
+                <button type="submit">Verify & Submit</button>
+            </div>
+
+            <div class="form-group">
+                <label for="ifsCode">IFS Code:</label>
+                <input type="text" id="ifsCode" name="ifsCode" required>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("epfForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Basic validation
+            const bankAccount = document.getElementById("bankAccount").value;
+            if (bankAccount.trim() === "") {
+                alert("Please enter your bank account number!");
+                return;
+            }
+
+            alert("EPF claim form submitted successfully!");
+            this.reset(); // Clear the form after submission
+        });
+    </script>
+
+</body>
+</html>
