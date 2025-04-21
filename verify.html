@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quick PF - PF Withdrawal Service</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
+
+  <!-- FontAwesome for icons -->
+  <script src="https://kit.fontawesome.com/8e3e35d3e8.js" crossorigin="anonymous"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        /* display: flex; (to stick the footer on bottom)
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0; */
+
+      background-color: #eef8ff;
+    }
+
+    /* Navigation Bar */
+    .navigation {
+      background-color: #0f1111;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      position: relative;
+      z-index: 100;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-img {
+      height: 50px;
+      width: 50px;
+    }
+
+    .nav-add {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .lists {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    .lists li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .lists li a:hover {
+      color: #cccccc;
+    }
+
+    .sign-btn {
+      height: 2rem;
+      padding: 0 10px;
+      border-radius: 5px;
+      font-size: 1rem;
+      background-color: #585757;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .sign-btn:hover {
+      background-color: #a1a1a1;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* MOBILE NAVIGATION */
+    @media (max-width: 768px) {
+      .lists {
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: -100%;
+        height: 100vh;
+        width: 70%;
+        background-color: #0f1111;
+        padding-top: 70px;
+        transition: left 0.3s ease;
+        z-index: 1000;
+      }
+
+      .lists.show {
+        left: 0;
+      }
+
+      .lists li {
+        padding: 15px 20px;
+        border-bottom: 1px solid #333;
+      }
+
+      .lists a {
+        font-size: 1.2rem;
+      }
+
+      .hamburger {
+        display: block;
+        z-index: 1100;  
+      }
+
+      .sign-btn {
+        display: none;
+      }
+    }
+
+    /* Footer */
+    footer {
+      /* margin-top: auto; (to stick the footer on bottom) */
+
+      background: linear-gradient(to right, #100444, #490808);
+      color: white;
+      padding: 80px 20px 30px;
+      border-top-left-radius: 100px;
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .col {
+      flex: 1 1 200px;
+    }
+
+    .footer-logo {
+      width: 80px;
+      margin-bottom: 15px;
+    }
+
+    ul li {
+      list-style: none;
+      margin-bottom: 10px;
+    }
+
+    ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .email-id {
+      border-bottom: 1px solid #ccc;
+      display: inline-block;
+      margin: 10px 0;
+    }
+
+    form input[type="email"] {
+      width: 100%;
+      background: transparent;
+      color: white;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      padding: 5px;
+    }
+
+    .social-icons i {
+      margin-top: 10px;
+      margin-right: 10px;
+      background: white;
+      color: black;
+      border-radius: 50%;
+      padding: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    /* Verification form */
+    body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f6f6;
+            margin: 0;
+            padding: 0;
+        }
+
+    .container {
+            max-width: 900px;
+            background: white;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            background: #2a9d8f;
+            padding: 15px;
+            text-align: center;
+            margin: -20px -20px 20px -20px;
+            font-size: 20px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 16px;
+            text-decoration: underline;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            flex: 1 1 45%;
+            margin: 10px 2.5%;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .note {
+            font-size: 13px;
+            color: #a00;
+            margin-top: 10px;
+        }
+
+        button {
+            background: #2a9d8f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #21867a;
+        }
+
+        @media (max-width: 600px) {
+            .form-group {
+                flex: 1 1 100%;
+                margin: 10px 0;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+        }
+
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <div class="navigation">
+    <div class="nav-left">
+      <img src="https://www.quickpf.com/wp-content/uploads/2022/06/candidate-icon-10.png" alt="Logo" class="logo-img" onclick="refreshPage()">
+      <span class="nav-add">Quick PF</span>
+    </div>
+
+    <div class="hamburger" id="hamburger">&#9776;</div>
+
+    <ul class="lists" id="nav-links">
+      <li><a href="#Home">Home</a></li>
+      <li><a href="#Services">Services</a></li>
+      <li><a href="#About">About</a></li>
+      <li><a href="#Contact">Contact</a></li>
+    </ul>
+
+    <button class="sign-btn">Sign In</button>
+  </div>
+
+  <!-- Verification form -->
+  <div class="container">
+    <h2>ONLINE CLAIM (FORM 31,19,10C & 10D)</h2>
+
+    <form id="claimForm">
+        <!-- Member Details -->
+        <div class="section">
+            <div class="section-title">MEMBER DETAILS</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Employee Name</label>
+                    <input type="text" id="empName" required>
+                </div>
+                <div class="form-group">
+                    <label>Mobile</label>
+                    <input type="tel" id="mobile" pattern="[0-9]{10}" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- KYC Details -->
+        <div class="section">
+            <div class="section-title">KYC DETAILS</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Aadhaar No.</label>
+                    <input type="text" id="aadhaar" pattern="\d{12}" required>
+                </div>
+                <div class="form-group">
+                    <label>PAN No.</label>
+                    <input type="text" id="pan" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" required>
+                </div>
+                <div class="form-group">
+                    <label>Bank Account No.</label>
+                    <input type="text" id="bankAcc" pattern="\d{9,18}" required>
+                </div>
+                <div class="form-group">
+                    <label>IFSC Code</label>
+                    <input type="text" id="ifsc" pattern="[A-Z]{4}0[A-Z0-9]{6}" required>
+                </div>
+                <div class="form-group" style="flex: 1 1 90%;">
+                    <label>Branch Name & Address</label>
+                    <input type="text" id="branch" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Details -->
+        <div class="section">
+            <div class="section-title">SERVICE DETAILS</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Member ID</label>
+                    <input type="text" id="memberId" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="note">
+            Note: Please verify your Bank Account Number as seeded against UAN. If seeded bank account doesn't
+            belong to you or is closed, please update KYC with your employer before proceeding.
+        </div>
+
+        <br />
+        <button type="submit">Submit Claim</button>
+    </form>
+</div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="row" id="About">
+      <div class="col">
+        <h2>About Us</h2>
+        <img src="https://www.quickpf.com/wp-content/uploads/2022/06/candidate-icon-10.png" alt="Logo" class="footer-logo"/>
+        <p>This website is for PF withdrawal. To connect with us, click on the social media icons below.</p>
+      </div>
+      <div class="col">
+        <h3>Office</h3>
+        <p>Shivaji Nagar, Govandi</p>
+        <p>Mumbai-400043, India</p>
+        <p class="email-id">jaiswarparveen72@gmail.com</p>
+        <p>+91-9819736339</p>
+      </div>
+      <div class="col">
+        <h3>Links</h3>
+        <ul>
+          <li><a href="#Home">Home</a></li>
+          <li><a href="#Services">Services</a></li>
+          <li><a href="#About">About Us</a></li>
+          <li><a href="#Contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Newsletter</h3>
+        <form>
+          <input type="email" placeholder="Enter your email" required />
+        </form>
+        <div class="social-icons">
+          <i class="fa-brands fa-whatsapp"></i>
+          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-twitter"></i>
+        </div>
+      </div>
+    </div>
+    <p class="copyright">© 2024 Quick PF. All rights reserved.</p>
+  </footer>
+
+  <!-- Script for Menu Toggle + Link Click -->
+  <script>
+    const navLinks = document.getElementById("nav-links");
+    const hamburger = document.getElementById("hamburger");
+
+    // Toggle menu on hamburger click
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+    // Close menu on nav link click
+    document.querySelectorAll(".lists a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+      });
+    });
+
+    // Handle PF form
+    document.querySelectorAll(".pf-form").forEach(form => {
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        alert("Your PF withdrawal request has been submitted!");
+        this.reset();
+      });
+    });
+
+    // Reload page by click on logo
+    function refreshPage() {
+      location.reload()
+    }
+
+    // Verification form
+
+    // Sample expected data for validation
+    const validData = {
+      empName: "PRAVEEN JAISWAR",
+      mobile: "1234567890",
+      aadhaar: "123456789012",
+      pan: "ABCDE1234F",
+      bankAcc: "987654321098",
+      ifsc: "SBIN0001234",
+      branch: "SBI BANK, MUMBAI",
+      memberId: "MH123456789000",
+    };
+
+    document.getElementById("claimForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const requiredFields = [
+            "empName", "fatherName", "dob", "mobile",
+            "aadhaar", "pan", "bankAcc", "ifsc",
+            "branch", "memberId", "dojEpf", "dojEps"
+        ];
+
+        let allValid = true;
+        let message = "";
+
+        requiredFields.forEach(id => {
+            const input = document.getElementById(id);
+            if (!input.checkValidity()) {
+                allValid = false;
+                message += `• ${input.previousElementSibling.innerText} is invalid or empty.\n`;
+            }
+        });
+
+        if (!allValid) {
+            alert("Please correct the following errors:\n\n" + message);
+            return;
+        }
+
+        alert("Form submitted successfully!");
+    });
+
+     // Form submit handler
+  document.getElementById("claimForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    alert("✅ Bank verification done successfully.");
+
+      // Redirect to claim form page
+      window.location.href = "claim.html";
+  });
+    
+  </script>
+</body>
+</html>
