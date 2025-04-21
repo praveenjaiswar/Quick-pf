@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quick PF - PF Withdrawal Service</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
+
+  <!-- FontAwesome for icons -->
+  <script src="https://kit.fontawesome.com/8e3e35d3e8.js" crossorigin="anonymous"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        /* display: flex; (to stick the footer on bottom)
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0; */
+
+      background-color: #eef8ff;
+    }
+
+    /* Navigation Bar */
+    .navigation {
+      background-color: #0f1111;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      position: relative;
+      z-index: 100;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-img {
+      height: 50px;
+      width: 50px;
+    }
+
+    .nav-add {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .lists {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    .lists li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .lists li a:hover {
+      color: #cccccc;
+    }
+
+    .sign-btn {
+      height: 2rem;
+      padding: 0 10px;
+      border-radius: 5px;
+      font-size: 1rem;
+      background-color: #585757;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .sign-btn:hover {
+      background-color: #a1a1a1;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* MOBILE NAVIGATION */
+    @media (max-width: 768px) {
+      .lists {
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: -100%;
+        height: 100vh;
+        width: 70%;
+        background-color: #0f1111;
+        padding-top: 70px;
+        transition: left 0.3s ease;
+        z-index: 1000;
+      }
+
+      .lists.show {
+        left: 0;
+      }
+
+      .lists li {
+        padding: 15px 20px;
+        border-bottom: 1px solid #333;
+      }
+
+      .lists a {
+        font-size: 1.2rem;
+      }
+
+      .hamburger {
+        display: block;
+        z-index: 1100;  
+      }
+
+      .sign-btn {
+        display: none;
+      }
+    }
+
+    /* Claim form */
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #343a40;
+      margin-bottom: 30px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .status-box {
+      background-color: #e9f7ef;
+      border-left: 5px solid #28a745;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 5px;
+      display: none;
+    }
+    .note {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #6c757d;
+    }
+    .kyc-note {
+      background-color: #e2f0d9;
+      border-left: 4px solid #28a745;
+      padding: 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #155724;
+    }
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px;
+        padding: 15px;
+      }
+      h2 {
+        font-size: 20px;
+      }
+    }
+
+    /* Footer */
+    footer {
+      /* margin-top: auto; (to stick the footer on bottom) */
+
+      background: linear-gradient(to right, #100444, #490808);
+      color: white;
+      padding: 80px 20px 30px;
+      border-top-left-radius: 100px;
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .col {
+      flex: 1 1 200px;
+    }
+
+    .footer-logo {
+      width: 80px;
+      margin-bottom: 15px;
+    }
+
+    ul li {
+      list-style: none;
+      margin-bottom: 10px;
+    }
+
+    ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .email-id {
+      border-bottom: 1px solid #ccc;
+      display: inline-block;
+      margin: 10px 0;
+    }
+
+    form input[type="email"] {
+      width: 100%;
+      background: transparent;
+      color: white;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      padding: 5px;
+    }
+
+    .social-icons i {
+      margin-top: 10px;
+      margin-right: 10px;
+      background: white;
+      color: black;
+      border-radius: 50%;
+      padding: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <div class="navigation">
+    <div class="nav-left">
+      <img src="https://www.quickpf.com/wp-content/uploads/2022/06/candidate-icon-10.png" alt="Logo" class="logo-img" onclick="refreshPage()">
+      <span class="nav-add">Quick PF</span>
+    </div>
+
+    <div class="hamburger" id="hamburger">&#9776;</div>
+
+    <ul class="lists" id="nav-links">
+      <li><a href="#Home">Home</a></li>
+      <li><a href="#Services">Services</a></li>
+      <li><a href="#About">About</a></li>
+      <li><a href="#Contact">Contact</a></li>
+    </ul>
+
+    <button class="sign-btn">Sign In</button>
+  </div>
+
+  <!-- Claim form -->
+  <div class="container">
+    <h2>EPF Claim Form (Quick PF)</h2>
+    <form id="pfForm">
+      <div class="form-group">
+        <label>Mobile Number</label>
+        <input type="text" id="mobile" required>
+      </div>
+      <div class="form-group">
+        <label>Universal Account Number (UAN)</label>
+        <input type="text" id="uan" required>
+      </div>
+      <div class="form-group">
+        <label>Name (In Capital Letters)</label>
+        <input type="text" id="name" required>
+      </div>
+      <div class="form-group">
+        <label>PAN Number</label>
+        <input type="text" id="pan" required>
+      </div>
+      <div class="form-group">
+        <label>I want to apply for</label>
+        <select id="claimType" required>
+          <option value="">--Select Claim Option--</option>
+          <option value="FORM-19">ONLY PF WITHDRAWAL (FORM-19)</option>
+          <option value="FORM-10C">ONLY PENSION WITHDRAWAL (FORM-10C)</option>
+          <option value="CERTIFICATE">SCHEME CERTIFICATE (FORM-10C)</option>
+          <option value="FORM-31">PF ADVANCE (FORM-31)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Employee Address</label>
+        <select id="location" required>
+          <option value="">--Select Location--</option>
+          <option value="MUMBAI">MUMBAI</option>
+          <option value="PUNE">PUNE</option>
+          <option value="NASHIK">NASHIK</option>
+        </select>
+      </div>
+      <div class="form-group kyc-note">
+        ✅ KYC already verified by employer. No need to upload cheque/passbook.
+      </div>
+      <button type="submit">Submit Claim</button>
+    </form>
+  
+    <div class="status-box" id="statusBox">
+      <strong>✅ Claim Submitted!</strong><br>
+      <p><strong>Tracking ID:</strong> <span id="trackId"></span></p>
+      <p><strong>Claim Type:</strong> <span id="claimDisplay"></span></p>
+      <p><strong>Status:</strong> Under Process</p>
+      <button onclick="downloadForm()">Download Claimed Form</button>
+      <div class="note">Note: Claim will be settled within 10 to 15 working days.</div>
+    </div>
+  </div>
+
+
+
+  <!-- Footer -->
+  <footer>
+    <div class="row" id="About">
+      <div class="col">
+        <h2>About Us</h2>
+        <img src="https://www.quickpf.com/wp-content/uploads/2022/06/candidate-icon-10.png" alt="Logo" class="footer-logo"/>
+        <p>This website is for PF withdrawal. To connect with us, click on the social media icons below.</p>
+      </div>
+      <div class="col">
+        <h3>Office</h3>
+        <p>Shivaji Nagar, Govandi</p>
+        <p>Mumbai-400043, India</p>
+        <p class="email-id">jaiswarparveen72@gmail.com</p>
+        <p>+91-9819736339</p>
+      </div>
+      <div class="col">
+        <h3>Links</h3>
+        <ul>
+          <li><a href="#Home">Home</a></li>
+          <li><a href="#Services">Services</a></li>
+          <li><a href="#About">About Us</a></li>
+          <li><a href="#Contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Newsletter</h3>
+        <form>
+          <input type="email" placeholder="Enter your email" required />
+        </form>
+        <div class="social-icons">
+          <i class="fa-brands fa-whatsapp"></i>
+          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-twitter"></i>
+        </div>
+      </div>
+    </div>
+    <p class="copyright">© 2024 Quick PF. All rights reserved.</p>
+  </footer>
+
+  <!-- Script for Menu Toggle + Link Click -->
+  <script>
+    const navLinks = document.getElementById("nav-links");
+    const hamburger = document.getElementById("hamburger");
+
+    // Toggle menu on hamburger click
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+    // Close menu on nav link click
+    document.querySelectorAll(".lists a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+      });
+    });
+
+    // Reload page by click on logo
+    function refreshPage() {
+      location.reload()
+    }
+
+    // Claim form
+    const validData = {
+    mobile: "1234567890",
+    uan: "101234567890",
+    name: "PRAVEEN JAISWAR",
+    pan: "ABCDE1234F",
+    location: "MUMBAI"
+  };
+
+  document.getElementById("pfForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    let isValid = true;
+    let errors = "";
+
+    for (let key in validData) {
+      const input = document.getElementById(key);
+      if (!input || input.value.trim().toUpperCase() !== validData[key].toUpperCase()) {
+        isValid = false;
+        errors += `• ${key.toUpperCase()} is incorrect.\n`;
+      }
+    }
+
+    const claimType = document.getElementById("claimType").value;
+    if (!claimType) {
+      isValid = false;
+      errors += "• Claim type not selected.\n";
+    }
+
+    if (!isValid) {
+      alert("Validation Failed:\n\n" + errors);
+      return;
+    }
+
+    document.getElementById("trackId").innerText = "PF" + Math.floor(Math.random() * 1000000);
+    document.getElementById("claimDisplay").innerText = claimType;
+    document.getElementById("statusBox").style.display = "block";
+    document.getElementById("pfForm").reset();
+  });
+
+  function downloadForm() {
+    alert("🧾 Claim form download simulated.\n(Attach actual PDF in production).");
+  }
+    
+  </script>
+</body>
+</html>
